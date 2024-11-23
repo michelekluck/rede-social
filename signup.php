@@ -13,20 +13,23 @@ $username = $_POST['username'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
-$conn = new mysqli($host, $db_username, $password, $database);
-
-if ($conn->connect_error) {
-    die("<strong> Falha de conexão: </strong>" . $conn->connect_error);
+try {
+    $conn = new mysqli($host, $db_username, $password, $database);
+}
+catch(Exception $e) {
+    die("<strong> Falha de conexão: </strong>" . $e);
 }
 
-$sql = "INSERT INTO users (username, email, senha) values ('$username', '$email', '$senha')";
+$hash_password = password_hash($senha, PASSWORD_DEFAULT);
 
-if ($result = $conn->query($sql)) {
+$sql = "INSERT INTO users (username, email, senha) values ('$username', '$email', '$hash_password')";
+
+try {
+    $result = $conn->query($sql);
     echo "<p> Conta feita com sucesso! </p>";
-} else {
-    echo "<p> Erro executando INSERT: ". $conn->connect_error . "</p>";
+}catch(Exception $e) {
+    echo "<p> Erro executando INSERT: ". $e . "</p>";
 }
-$conn->close();
 ?>
 </body>
 </html>
