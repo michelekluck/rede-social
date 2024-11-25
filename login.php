@@ -6,7 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <p></p>
     <form action="loginPOST.php" method="POST">
     <label for="username">Username: </label>
         <input type="text" name="username" required/>
@@ -17,11 +16,19 @@
         <input type="submit">
     </form>
 
+    <p id="error"></p>
+
     <script>
-        function getQueryParams() {
+        function setErrorParam() {
             const params = new URLSearchParams(window.location.search);
-            const myParam = urlParams.get('erro');
-        }
+            const errorParam = params.get('erro');
+
+            if (errorParam) {
+                document.getElementById('error').innerText = errorParam
+            }
+        };
+        
+        setErrorParam()
     </script>
 </body>
 </html>

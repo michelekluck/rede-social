@@ -8,9 +8,9 @@
 <body>
 <?php 
 require 'bd/connect.php'; 
-require 'cookies.php';
 
 $username = $_POST['username'];
+$email = $_POST['email'];
 $senha = $_POST['senha'];
 
 try {
@@ -20,23 +20,16 @@ catch(Exception $e) {
     die("<strong> Falha de conexão: </strong>" . $e);
 }
 
-$sql = "SELECT senha, id FROM users WHERE username = '$username'";
+$hash_password = password_hash($senha, PASSWORD_DEFAULT);
+
+$sql = "INSERT INTO users (username, email, senha) values ('$username', '$email', '$hash_password')";
 
 try {
     $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-    if (password_verify($senha, $row["senha"])) {
-        $user_id = $row["id"];
-        createCookie($user_id, $conn, $cookieName);
-        header('location: index.php');
-    } else {
-        header(sprintf('location: %s?erro=senha ou usuario invalido', $_SERVER['HTTP_REFERER']));
-        die();
-    }
+    echo "<p> Conta feita com sucesso! </p>";
 }catch(Exception $e) {
-    echo "<p> Erro executando SELECT: ". $e . "</p>";
+    echo "<p> Erro executando INSERT: ". $e . "</p>";
 }
 ?>
-
 </body>
 </html>
