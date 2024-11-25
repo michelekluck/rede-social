@@ -14,10 +14,11 @@ $email = $_POST['email'];
 $senha = $_POST['senha'];
 
 try {
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $conn = new mysqli($host, $db_username, $password, $database);
 }
 catch(Exception $e) {
-    die("<strong> Falha de conexão: </strong>" . $e);
+    die("<strong>Falha de conexão:</strong> " . $e->getMessage());
 }
 
 $hash_password = password_hash($senha, PASSWORD_DEFAULT);
