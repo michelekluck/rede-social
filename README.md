@@ -39,3 +39,19 @@ O que foi feito até agora (24/11):
            então, SE a senha e o usuario estiverem corretas, redirecionamos o usuario para o index.php
          else -> SE NÃO, redirecionamos o usuario para a mesma pagina (a de login) so que com a mensagem de erro "senha ou usuario invalido"
        o catch captura algum tipo de erro que pode acontecer na consulta SQL SELECT e retorna na tela
+
+O que foi feito até agora (25/11):
+- No arquivo cookies.php criei a função validCookie que irá verificar a existencia de cookie do browser do usuario para, caso sim, seja feito um "login automatico" que direciona o usuario para o index.php e caso nao, não faz nada.
+  linha 28. verificamos se existe um cookie com o nome do nosso cookie, no caso pegando o valor do primeiro parametro da função -> $cookieName
+  linha 29. damos um return para que nada aconteça
+  linha 31. atribui o valor de $cookieName na variavel $cookieValue
+  linha 33. fazemos uma instrução SQL para que seja selecionado o campo valor da tabela cookies onde o campo value seja igual ao $cookieValue definido acima
+  linha 34. realizamos a instrução no banco de dados
+  linha 36. verificamos se o resultado da instrução é verdadeiro ($result irá retornar true se a consulta for bem sucedida) e se o $result retornar alguma coisa do banco (ou seja, encontrar um value que seja igual $cookieValue)
+  linha 37. se for encontrado, redirecionamos o usuario para o index.php
+  linha 38. terminamos a execução do script após o redirecionamento
+  linha 39. caso nenhum valor for encontrado, nada é feito.
+- No arquvo login.php foi adicionado uma tag PHP e nela fazemos o conexão com o banco de dados (igual nas outras paginas)
+  antes mesmo do formulario, eu chamo a função validCookie, passando como parametro a variavel $cookieName (seu valor esta no arquivo cookies.php) e $conn que tem o valor atribuido na linha 17
+  Assim, antes mesmo de aparecer a tela de login, o usuario anteriormente logado irá ser redirecionado para a tela principal
+  
