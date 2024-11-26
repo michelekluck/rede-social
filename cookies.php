@@ -33,7 +33,7 @@ function validCookie(string $cookieName, mysqli $conn) {
     $sql = "SELECT value FROM cookies WHERE value = '$cookieValue'";
     $result = $conn->query($sql);
 
-    if($result && $result->num_rows > 0) {
+    if($result && $result->fetch_assoc()) {
         header('location: index.php');
         exit;
     } else {
