@@ -24,9 +24,19 @@ function createCookie(int $user_id, mysqli $conn,string $cookieName) {
     );
 }
 
-function validCookie(string $cookieName){
-    if (!isset($COOKIE[$cookieName])) {
-        return false;
+function validCookie(string $cookieName, mysqli $conn) {
+    if(!isset($_COOKIE[$cookieName])) {
+        return;
     } 
-    $sql = "SELECT "
+    $cookieValue = $_COOKIE[$cookieName];
+
+    $sql = "SELECT value FROM cookies WHERE value = '$cookieValue'";
+    $result = $conn->query($sql);
+
+    if($result && $result->num_rows > 0) {
+        header('location: index.php');
+        exit;
+    } else {
+        return;
+    }   
 }
