@@ -54,4 +54,21 @@ O que foi feito até agora (25/11):<br>
 - No arquvo login.php foi adicionado uma tag PHP e nela fazemos o conexão com o banco de dados (igual nas outras paginas)
   antes mesmo do formulario, eu chamo a função validCookie, passando como parametro a variavel $cookieName (seu valor esta no <br>arquivo cookies.php) e $conn que tem o valor atribuido na linha 17<br>
   Assim, antes mesmo de aparecer a tela de login, o usuario anteriormente logado irá ser redirecionado para a tela principal<br>
-  
+<br>
+O que foi feito até agora (26/11): <br>
+- No arquivo cookies.php criei a função deleteCookie que deleta o cookie assim que o usuário sai (desloga) do site.<br>
+  A função tem como os mesmos parametros da função validCookie, que são $cookieName (aqui apenas um parametro vazio, o valor será passado depois, quando chamar a função) e $conn<br>
+  linha 45. verificamos se o cookie com nome $cookieName (passada ao chamar a função) existe no array de cookies passado pelo navegador, nesse caso como, fazemos a verificação com !isset que verifica se o cookie NAO EXISTE, e se o cookie nao for encontrado é retornado o false (nesse caso não há nada para deleter)<br>
+  linha 49. guardamos o valor relativo ao nome $cookieName na variavel $cookieValue<br>
+  linha 51. guardamos uma instrução sql na variavel $sql, essa instrução faz um delete da tabela cookie em que a linha value seja igual ao valor da variavel $cookieValue<br>
+  linha 53. se $_COOKIE encontrar $cookieName no array de cookies passados pelo navegador, executamos a query (instrução) do sql armazenado na variavel $sql<br>
+- No arquivo login.php fiz conexão com o bd assim como nas outras paginas<br>
+  linha 41. adicionei um link "?action=logout" que direciona o usuario para a propria pagina (index.php) mas com a query string ou seja a URL ficará assim: "localhost/rede-social/index.php?action=logout<br>
+  linha 25. é feita uma verificação se a pagina atual (url) tem a palavra 'action' como parametro e tambem, se tiver, compara o valor do parametro 'action' com a string 'logout'<br>
+  linha 26. chamamos a função setCookie que é usada para definir cookies no PHP, e a usamos para apagar os cookies, passamos como parametro o nome do cookie, o value pode ser vazio (porque vamos apagar) e como time (expiração do cookie) colocamos -3600 (ou seja, um dia antes), então assim, fazemos o cookie expirar o passado - isso faz com que ele seja apagado do navegador imediatamente<br>
+  linha 28. criamos uma variavel para armazenar a função deleteCookie, e o valor que será retornado indicará se o cookie foi apagado ou não, assim como definimos dentro da função, no arquivo cookies.php (caso o cookie exista, ele apaga, caso nao, retorna false)<br>
+  linha 30. verificamos se a variavel $isDeleted retorna true, se sim (foi deletado):<br>
+  linha 31. redirecionamos o usuario para a pagina login.ph<br>
+  linha 32. interrompemos a execução do script<br>
+  linha 33, 34. caso a função retorne false (ou seja, nã́o foi encontrado o cookie e nao foi deletado) retornamos uma mensagem de erro.
+

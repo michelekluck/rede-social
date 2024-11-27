@@ -35,8 +35,21 @@ function validCookie(string $cookieName, mysqli $conn) {
 
     if($result && $result->fetch_assoc()) {
         header('location: index.php');
-        exit;
+        exit();
     } else {
         return;
     }   
+}
+
+function deleteCookie(string $cookieName, mysqli $conn) {
+    if(!isset($_COOKIE[$cookieName])) {
+        return false;
+    }
+
+    $cookieValue = $_COOKIE[$cookieName];
+
+    $sql = "DELETE from cookies WHERE value = '$cookieValue'";
+    
+    return $conn->query($sql);
+
 }
