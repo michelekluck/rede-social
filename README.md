@@ -70,5 +70,26 @@ O que foi feito até agora (26/11): <br>
   linha 30. verificamos se a variavel $isDeleted retorna true, se sim (foi deletado):<br>
   linha 31. redirecionamos o usuario para a pagina login.ph<br>
   linha 32. interrompemos a execução do script<br>
-  linha 33, 34. caso a função retorne false (ou seja, nã́o foi encontrado o cookie e nao foi deletado) retornamos uma mensagem de erro.
+  linha 33, 34. caso a função retorne false (ou seja, nã́o foi encontrado o cookie e nao foi deletado) retornamos uma mensagem de erro.<br>
+O que foi feito até agora (27/11):<br>
+- No arquivo connect.php criamos uma classe chamada PostsRepository que tem como atributo a variavel $conn (que conecta ao banco de dados)<br>
+  linha 25.Criamos um contrutor dessa classe para que quando instanciarmos essa classe garantimos que receberemos a conexão com o banco;<br>
+  linha 30.Dentro da classe temos a função create que cria um novo post, nela temos como parametro $content e user $user_id que ainda nao foram definidos valor em lugar nenhum <br>
+  linha 31. adicionamos uma instrução insert sql dentro de uma função chamada $sql<br>
+  linha 32. $this->conn->query($sql) é a mesma coisa que $conn->query($sql) porém em vez de pegar o o conteudo a variavel $conn, estamos pegando do atributo da classe e depois executando a instrução no bd<br>
+  linha 35. criamos a função delete, que tem por objetivo deletar um post, nela passamos o parametro post_id, que é por ele que iremos identificar qual post excluir;<br>
+  linha 35. escrevemos a instrução delete sql<br>
+  linha 37. executamos a instrução<br>
+  linha 40. criamos uma função chamada getAll() que tem como objetivo retornar todos os posts no index para o usuario<br>
+  linha 41. escrevemos a instrução sql select;<br>
+  linha 42. atribuimos a execução da instrução do sql na variavel $result, ou seja, quando essa variavel for chamada, a instrução é executada<br>
+  linha 44. criamos um array vazio e guardamos na variavel $posts, esse array vai fazer exatamente o que a variavel chama: criar um array de posts<br>
+  linha 46. precisamos criar um loop while para que o seja percorrida cada linha do array. o fetch_assoc() pega os dados do db e transforma em um array associativo (com chave-valor) - percorremos cada linha desse array<br>
+  linha 48. pegamos só o que precisamos do array do fetch_assoc(), e passamos para ele quais são, como a linha "id", "content" e "user_id" - guardamos isso em uma variavel chamada $post, porque cada linha é equivalente a um post<br>
+  linha 50. adicionamos as linhas $post dentro do array $posts<br>
+  linha 53. retornamos o array $posts<br>
+  linha 20. criamos uma instancia da classe PostsRepository e passamos a conexão com o banco de dados usando a variavel $conn (parametro) - guardamos essa instancia em uma variavel global chamada $postsRepository que pode ser chamada em qualquer arquivo que faça um require do arquivo connect.php<br>
+- No arquivo index.php adicionamos um foreach que vai percorrer cada elemento do array $posts retornado pelo getAll()<br>
+  linha 39. pegamos apenas a chave "content" do array posts e guardamos o valor na variavel $content<br>
+  linha 40. mostramos na tela o $content, ou seja, cada linha do array $posts
 
