@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php 
-require 'bd/connect.php'; 
+require_once ('bd/connect.php');  
 
 $username = $_POST['username'];
 $email = $_POST['email'];

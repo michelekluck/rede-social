@@ -7,18 +7,8 @@
 </head>
 <body>
 <?php
-require 'bd/connect.php'; 
+require_once ('bd/connect.php'); 
 require 'cookies.php';
-
-$username = $_POST['username'];
-$senha = $_POST['senha'];
-
-try {
-    $conn = new mysqli($host, $db_username, $password, $database);
-}
-catch(Exception $e) {
-    die("<strong> Falha de conexão: </strong>" . $e);
-}
 
 validCookie($cookieName, $conn)
 ?>

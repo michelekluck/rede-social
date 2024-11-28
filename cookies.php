@@ -1,5 +1,5 @@
 <?php
-require 'bd/connect.php';
+require_once ('bd/connect.php'); 
 
 global $conn;
 global $cookieName;
@@ -33,7 +33,7 @@ function validCookie(string $cookieName, mysqli $conn) {
     $sql = "SELECT value FROM cookies WHERE value = '$cookieValue'";
     $result = $conn->query($sql);
 
-    if($result && $result->fetch_assoc()) {
+    if($result && $result->num_rows>0) {
         header('location: index.php');
         exit();
     } else {

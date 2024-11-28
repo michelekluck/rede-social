@@ -9,7 +9,7 @@
 
 <body>
     <?php
-    require 'bd/connect.php'; 
+    require_once ('bd/connect.php');  
     require 'cookies.php';
     
     $username = $_POST['username'];
@@ -33,6 +33,11 @@
         } else {
             echo "Erro ao tentar deslogar. Tente novamente.";
         }
+    }
+
+    foreach ($postsRepository->getAll() as $post) {
+        $content = $post["content"];
+        echo "$content";
     }
     ?>
 
