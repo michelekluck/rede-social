@@ -33,12 +33,11 @@ function validCookie(string $cookieName, mysqli $conn) {
     $sql = "SELECT value FROM cookies WHERE value = '$cookieValue'";
     $result = $conn->query($sql);
 
-    if($result && $result->num_rows>0) {
+    if($result && $result->num_rows > 0) {
         header('location: index.php');
+        
         exit();
-    } else {
-        return;
-    }   
+    }
 }
 
 function deleteCookie(string $cookieName, mysqli $conn) {
@@ -52,4 +51,21 @@ function deleteCookie(string $cookieName, mysqli $conn) {
     
     return $conn->query($sql);
 
+}
+
+function setUserSession(string $cookieName, mysqli $conn) {
+    if (isset($_SESSION['user_id']) || ($_SESSION['username'])) {
+        return;
+    }
+    $cookieValue = $_COOKIE[$cookieName];
+
+    $sql = "SELECT cookies.id as cookie_id, users.id as user_id, users.username as username from cookies inner join users on cookies.user_id = users.id; WHERE cookies.value = $cookieValue";
+    $result =  $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    $user_id = $row['user_id'];
+    $username = $row['username'];
+
+    $_SESSION['user_id'] = $user_id;
+    $_SESSION['username'] = $username;    
 }

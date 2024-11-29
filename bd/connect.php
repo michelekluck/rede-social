@@ -17,7 +17,7 @@
         die("<strong> Falha de conexão: </strong>" . $e);
     }
 
-    $postsRepository = new PostsRepository($conn);
+    $postsRepository = new PostsRepository($conn); // esse $conn se refere a variável acima (que faz conexão com o banco de dados)
 
     class PostsRepository {
         private mysqli $conn ;
@@ -53,4 +53,8 @@
             return $posts; 
         }
     }
+
+// UsersRepository
+// LikesRepository
+// CookiesRepository
 ?>
