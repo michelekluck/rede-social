@@ -50,7 +50,16 @@
     // mostra o array de posts
     foreach ($postsRepository->getAll() as $post) { // foreach -> percorre o array
         $content = $post["content"];
-        echo "<p>$content</p>";
+        $post_id = $post["id"];
+
+        echo 
+        "<div>
+        <div><p>$content</p></div>
+        <form action='postDelete.php' method='POST'>
+        <input type='number' value='$post_id' name='id' style='display: none'>
+        <input type='submit' value='Excluir'>
+        </form>
+        </div>";
     }
     ?>
 
