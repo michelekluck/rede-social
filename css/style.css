@@ -7,11 +7,13 @@
     --title-font: "Lexend Mega", serif;
 }
 
+/*geral*/
 body {
     background-color: var(--bg-color);
     margin: 0;
 }
 
+/*login e signup*/
 .container-login{
     width: 100vw;
     height: 100vh;
@@ -21,6 +23,7 @@ body {
     align-items: center;
 }
 
+/*login - caixa branca*/
 .login-box {
     background-color: white;
     width: 540px;
@@ -32,6 +35,7 @@ body {
     box-shadow: 1px 2px 2px 1px rgb(0 0 0 / 25%);
 }
 
+/*titulos*/
 h1 {
     font-family: var(--title-font);
     font-weight: 400;
@@ -40,6 +44,7 @@ h1 {
     text-align: center;
 }
 
+/*login e signup*/
 .text-form {
     font-size: 16px;
     padding: 10px;
@@ -48,15 +53,18 @@ h1 {
     text-align: center;
 }
 
+/*login e signup*/
 .inputs-login {
     text-align: left;
 }
 
+/*login e signup*/
 .input-individualy {
     width: fit-content;
     margin-left: 30px;
 }
 
+/*login e signup*/
 .input-individualy input {
     width: 435px;
     padding: 10px;
@@ -64,11 +72,13 @@ h1 {
     border-radius: 10px;
 }
 
+/*login e signup*/
 .error-text {
     color: red;
     margin: 0;
 }
 
+/*login e signup*/
 .button {
     background-color: var(--primary-color);
     border-radius: 100px;
@@ -76,14 +86,33 @@ h1 {
     width: 145px;
     padding: 8px;
     margin-top: 24px;
+    cursor: pointer;
 } 
 
+.button:hover {
+    background-color: #FFA829;
+}
+
+/*login e signup*/
 p {
     font-family: var(--texts-font);
 }
 
+/*login e signup*/
 a {
     text-decoration: none;
     color: var(--secondary-color);
     font-weight: 700;
+}
+
+/*signup - caixa branca*/
+.signup-box {
+    background-color: white;
+    width: 540px;
+    height: 540px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 1px 2px 2px 1px rgb(0 0 0 / 25%);
 }
