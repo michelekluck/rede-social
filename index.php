@@ -51,15 +51,19 @@
     foreach ($postsRepository->getAll() as $post) { // foreach -> percorre o array
         $content = $post["content"];
         $post_id = $post["id"];
+        $user_id = $post["user_id"];
 
-        echo 
-        "<div>
-        <div><p>$content</p></div>
-        <form action='postDelete.php' method='POST'>
-        <input type='number' value='$post_id' name='id' style='display: none'>
-        <input type='submit' value='Excluir'>
-        </form>
-        </div>";
+        echo "<div><p>$content</p></div>";
+        if ($_SESSION['user_id'] == $user_id) {
+            echo 
+            "<div>
+            <form action='postDelete.php' method='POST'>
+            <input type='number' name='id' value='$post_id' style='display: none'>
+            <input type='submit' value='Excluir'>
+            </form>
+            </div>";
+        }
+        
     }
     ?>
 

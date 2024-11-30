@@ -59,7 +59,7 @@ function setUserSession(string $cookieName, mysqli $conn) {
     }
     $cookieValue = $_COOKIE[$cookieName];
 
-    $sql = "SELECT cookies.id as cookie_id, users.id as user_id, users.username as username from cookies inner join users on cookies.user_id = users.id; WHERE cookies.value = $cookieValue";
+    $sql = "SELECT cookies.id as cookie_id, users.id as user_id, users.username as username from cookies inner join users on cookies.user_id = users.id WHERE cookies.value = $cookieValue";
     $result =  $conn->query($sql);
     $row = $result->fetch_assoc();
 

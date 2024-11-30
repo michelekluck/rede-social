@@ -35,7 +35,7 @@
         function delete(int $post_id) {
             $sql = "DELETE FROM posts WHERE id = '$post_id'";
             $this->conn->query($sql);
-        }
+        } 
     
         function getAll() {
             $sql = "SELECT id, content, user_id FROM posts ORDER BY id DESC";
