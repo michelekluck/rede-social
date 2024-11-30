@@ -11,6 +11,7 @@
 body {
     background-color: var(--bg-color);
     margin: 0;
+    padding: 0;
 }
 
 /*login e signup*/
@@ -103,6 +104,11 @@ a {
     text-decoration: none;
     color: var(--secondary-color);
     font-weight: 700;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 /*signup - caixa branca*/
@@ -115,4 +121,39 @@ a {
     justify-content: center;
     border-radius: 10px;
     box-shadow: 1px 2px 2px 1px rgb(0 0 0 / 25%);
+}
+
+/*INDEX*/
+.header {
+    background-color: white;
+    padding: 10px 0;
+    margin: 0;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.header .container-index {
+    max-width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.post-box {
+    background-color: red;
+    align-items: center;
+    text-align: center;
+}
+
+textarea {
+    width: 720px;
+    border-radius: 10px;
+    border: none;
+    resize: none;
+    padding: 10px;
+    height: 100%;
 }

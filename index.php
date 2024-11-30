@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Kumbh+Sans:wght,YOPQ@100..900,116&family=Lexend+Mega:wght@100..900&family=Madimi+One&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Kumbh+Sans:wght,YOPQ@100..900,116&family=Lexend+Mega:wght@100..900&family=Madimi+One&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
+    </style>
+    <title>Interlines</title>
 </head>
 
 <body>
@@ -21,16 +26,19 @@
         die("<strong> Falha de conexão: </strong>" . $e);
     }
 
+    // define uma sessão pro usuário
     setUserSession($cookieName, $conn);
 
+    // verifica qual usuário está logado
     // verifica se há um campo com user_id na session
     // verifica se há um campo com username na session
     if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         // se existir
-        echo "<h2>Bem-vindo, " . $_SESSION['username'] . "!</h2>";
-        echo "<p>ID do usuário: " . $_SESSION['user_id'] . "</p>";
+        $username = $_SESSION['username'];
+        $user_id = $_SESSION['user_name'];
     } else {
-        echo "<p>erro no index.php</p>";
+        $user_name = 'usuário desconhecido';
+        $user_id = 'id não disponivel';
     }
 
     // logout - sair (apaga o cookie -> desloga o usuario)
@@ -46,38 +54,45 @@
             echo "Erro ao tentar deslogar. Tente novamente.";
         }
     }
+    ?>
 
-    // mostra o array de posts
-    foreach ($postsRepository->getAll() as $post) { // foreach -> percorre o array
-        $content = $post["content"];
-        $post_id = $post["id"];
-        $user_id = $post["user_id"];
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container-index">
+            <p>Bem-vindo, <?php echo $username; ?>!</p>
+            <a href="action=logout" id="sair">Sair</a>
+        </div>
+    </header>
 
-        echo "<div><p>$content</p></div>";
-        if ($_SESSION['user_id'] == $user_id) {
-            echo 
-            "<div>
+    <div class="post-box">
+        <form action="postAction.php" method="POST">
+            <label for="content">
+                <textarea type="text" name="content" placeholder="No que você está pensando?"></textarea>
+            </label>
+            <input type="submit">
+        </form>
+    </div>
+</body>
+
+<!-- POSTS -->
+<?php
+// mostra o array de posts
+foreach ($postsRepository->getAll() as $post) { // foreach -> percorre o array
+    $content = $post["content"];
+    $post_id = $post["id"];
+    $user_id = $post["user_id"];
+
+    echo "<div><p>$content</p></div>";
+    if ($_SESSION['user_id'] == $user_id) {
+        echo
+        "<div>
             <form action='postDelete.php' method='POST'>
             <input type='number' name='id' value='$post_id' style='display: none'>
             <input type='submit' value='Excluir'>
             </form>
             </div>";
-        }
-        
     }
-    ?>
-
-    <h1>hello world</h1>
-
-    <form action="postAction.php" method="POST">
-        <label for="content">
-            <textarea type="text" name="content" placeholder="No que você está pensando?"></textarea>
-        </label>
-
-        <input type="submit">
-    </form>
-
-    <a href="?action=logout">Sair</a>
-</body>
+}
+?>
 
 </html>
