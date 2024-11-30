@@ -8,5 +8,82 @@
 }
 
 body {
-    
+    background-color: var(--bg-color);
+    margin: 0;
+}
+
+.container-login{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    background-color: white;
+    width: 540px;
+    height: 450px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 1px 2px 2px 1px rgb(0 0 0 / 25%);
+}
+
+h1 {
+    font-family: var(--title-font);
+    font-weight: 400;
+    color: var(--title-color);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.text-form {
+    font-size: 16px;
+    padding: 10px;
+    align-items: center;
+    font-family: var(--texts-font);
+    text-align: center;
+}
+
+.inputs-login {
+    text-align: left;
+}
+
+.input-individualy {
+    width: fit-content;
+    margin-left: 30px;
+}
+
+.input-individualy input {
+    width: 435px;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 10px;
+}
+
+.error-text {
+    color: red;
+    margin: 0;
+}
+
+.button {
+    background-color: var(--primary-color);
+    border-radius: 100px;
+    border: none;  
+    width: 145px;
+    padding: 8px;
+    margin-top: 24px;
+} 
+
+p {
+    font-family: var(--texts-font);
+}
+
+a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-weight: 700;
 }

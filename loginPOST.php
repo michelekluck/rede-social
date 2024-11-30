@@ -33,7 +33,7 @@ try {
         createCookie($user_id, $conn, $cookieName);
         header('location: index.php');
     } else {
-        header(sprintf('location: %s?erro=senha ou usuario invalido', $_SERVER['HTTP_REFERER']));
+        header(sprintf('location: %s?erro=*senha e/ou usuário inválido', $_SERVER['HTTP_REFERER']));
         die();
     }
 }catch(Exception $e) {
