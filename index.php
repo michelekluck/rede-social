@@ -28,7 +28,12 @@
     }
 
     // define uma sessão pro usuário
-    setUserSession($cookieName, $conn);
+    // caso o cookie tenha experirado vai cair em um erro, e o usuario terá que logar novamente
+    try {
+        setUserSession($cookieName, $conn);
+    } catch (Exception $e) {
+        die("Sua sessão expirou!" . $e);
+    }
 
     // verifica qual usuário está logado
     // verifica se há um campo com user_id na session
@@ -88,7 +93,7 @@
                 <?php if ($_SESSION['user_id'] == $user_id): ?>
                     <div>
                         <form action='postDelete.php' method='POST'>
-                            <input type='number' name='id' value='$post_id' style='display: none'>
+                            <input type='number' name='id' value='<?= $post_id ?>' style='display: none'>
                             <input type='submit' value='X' class="button-delete">
                         </form>
                         <div class="edit-icon">
@@ -110,6 +115,7 @@
                 <input type="text" name='id' style="display: none;" id='modal-input'>
                 <textarea type="text" name="content" class="modal-textarea" id='modal-textarea'></textarea>
                 <div class="align-button">
+                    <button class="default-button" style="background-color: lightgray;" onclick="closeModal()">Fechar</button>
                     <input type="submit" value="Salvar" class="default-button">
                 </div>
             </form>
@@ -118,11 +124,17 @@
 
     <script>
         function openModal(post_id, content) {
-            document.getElementById('modal-update').classList.toggle('hidden');
-            document.getElementById('modal-overlay').classList.toggle('hidden');
-            document.getElementById('modal-overlay').classList.toggle('flex');
+            document.getElementById('modal-update').classList.remove('hidden');
+            document.getElementById('modal-overlay').classList.remove('hidden');
+            document.getElementById('modal-overlay').classList.add('flex');
             document.getElementById('modal-input').value = post_id;
             document.getElementById('modal-textarea').value = content;
+        }
+
+        function closeModal() {
+            document.getElementById('modal-update').classList.add('hidden');
+            document.getElementById('modal-overlay').classList.add('hidden');
+            document.getElementById('modal-overlay').classList.remove('flex');
         }
     </script>
 </body>

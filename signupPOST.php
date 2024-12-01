@@ -28,6 +28,8 @@ $sql = "INSERT INTO users (username, email, senha) values ('$username', '$email'
 try {
     $result = $conn->query($sql);
     echo "<p> Conta feita com sucesso! </p>";
+    header('location:login.php');
+    exit();
 }catch(Exception $e) {
     echo "<p> Erro executando INSERT: ". $e . "</p>";
 }

@@ -38,7 +38,7 @@
         } 
 
         function update(int $post_id, string $content) {
-            $sql = "UPDATE posts SET content = $content WHERE id = $post_id";
+            $sql = "UPDATE posts SET content = '$content' WHERE id = '$post_id'";
             $this->conn->query($sql);
         }
     
