@@ -36,6 +36,11 @@
             $sql = "DELETE FROM posts WHERE id = '$post_id'";
             $this->conn->query($sql);
         } 
+
+        function update(int $post_id, string $content) {
+            $sql = "UPDATE posts SET content = $content WHERE id = $post_id";
+            $this->conn->query($sql);
+        }
     
         function getAll() {
             $sql = "SELECT id, content, user_id FROM posts ORDER BY id DESC";
