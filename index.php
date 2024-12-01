@@ -65,11 +65,9 @@
     </header>
 
     <div class="post-box">
-        <form action="postAction.php" method="POST">
-            <label for="content">
+        <form action="postAction.php" method="POST" class="post-form">
                 <textarea type="text" name="content" placeholder="No que você está pensando?"></textarea>
-            </label>
-            <input type="submit">
+            <input type="submit" value="Postar">
         </form>
     </div>
 </body>

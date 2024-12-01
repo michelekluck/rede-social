@@ -5,6 +5,7 @@
     --title-color: #3C3C3C;
     --texts-font: "Mulish", sans-serif;
     --title-font: "Lexend Mega", serif;
+    --box-shadow: 1px 2px 2px 1px rgb(0 0 0 / 25%);
 }
 
 /*geral*/
@@ -120,7 +121,7 @@ a:hover {
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    box-shadow: 1px 2px 2px 1px rgb(0 0 0 / 25%);
+    box-shadow: var(--box-shadow);
 }
 
 /*INDEX*/
@@ -144,16 +145,51 @@ a:hover {
 }
 
 .post-box {
-    background-color: red;
     align-items: center;
     text-align: center;
+    width: 100%;
+    height: 16vh;
+    display: flex;
+    justify-content: center;
 }
 
 textarea {
-    width: 720px;
+    width: 98% ;
+    height: 60%;
     border-radius: 10px;
     border: none;
     resize: none;
     padding: 10px;
-    height: 100%;
+    outline: 0;
+}
+
+textarea::placeholder {
+    font-family: var(--texts-font);
+    font-size: 16px;
+    color: #BEBEBE;
+}
+
+.post-form {
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    text-align: right;
+    max-width: 720px;    
+    padding: 10px;
+    background-color: white;
+}
+
+.post-form input {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 100px;
+    padding: 8px;
+    width: 145px;
+    font-family: var(--texts-font);
+    cursor: pointer;
+}
+
+.post-form input:hover {
+    background-color: #FFA829;
 }
