@@ -66,31 +66,37 @@
 
     <div class="post-box">
         <form action="postAction.php" method="POST" class="post-form">
-                <textarea type="text" name="content" placeholder="No que você está pensando?"></textarea>
+            <textarea type="text" name="content" placeholder="No que você está pensando?"></textarea>
             <input type="submit" value="Postar">
         </form>
     </div>
+
+    <div class="posts">
+        <!-- POSTS -->
+        <?php
+        // mostra o array de posts
+        foreach ($postsRepository->getAll() as $post) { // foreach -> percorre o array
+            $content = $post["content"];
+            $post_id = $post["id"];
+            $user_id = $post["user_id"];
+        ?>
+            <div class="englobatudo">
+                <div class="published">
+                    <p><?= $content ?></p>
+                </div>
+                <?php if ($_SESSION['user_id'] == $user_id): ?>
+                    <div>
+                        <form action='postDelete.php' method='POST'>
+                            <input type='number' name='id' value='$post_id' style='display: none'>
+                            <input type='submit' value='X' class="button-delete">
+                        </form>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
 </body>
-
-<!-- POSTS -->
-<?php
-// mostra o array de posts
-foreach ($postsRepository->getAll() as $post) { // foreach -> percorre o array
-    $content = $post["content"];
-    $post_id = $post["id"];
-    $user_id = $post["user_id"];
-
-    echo "<div><p>$content</p></div>";
-    if ($_SESSION['user_id'] == $user_id) {
-        echo
-        "<div>
-            <form action='postDelete.php' method='POST'>
-            <input type='number' name='id' value='$post_id' style='display: none'>
-            <input type='submit' value='Excluir'>
-            </form>
-            </div>";
-    }
-}
-?>
 
 </html>
